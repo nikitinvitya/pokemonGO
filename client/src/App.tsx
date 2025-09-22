@@ -1,8 +1,9 @@
-import './index.scss'
+import './styles/index.scss'
 
 const App = () => {
   return (
     <div className='app'>
+
     </div>
   );
 };
