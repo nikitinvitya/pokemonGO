@@ -1,0 +1,1 @@
+export {CurrentPokemonPageAsync as CurrentPokemonPage} from './ui/CurrentPokemonPage.async'
