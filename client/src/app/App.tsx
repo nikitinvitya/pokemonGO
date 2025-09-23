@@ -1,15 +1,12 @@
-import './styles/index.scss'
-import {AppRouter} from "@/app/providers/router";
+import './styles/index.scss';
+import { AppRouter } from '@/app/providers/router';
 
 const App = () => {
   return (
-    <div className='app'>
-
+    <div className="app">
       <AppRouter />
     </div>
   );
 };
 
 export default App;
-
-// TODO: add eslint/stylelint,

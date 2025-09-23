@@ -1,1 +1,1 @@
-export {CurrentPokemonPageAsync as CurrentPokemonPage} from './ui/CurrentPokemonPage.async'
+export { CurrentPokemonPageAsync as CurrentPokemonPage } from './ui/CurrentPokemonPage.async';
