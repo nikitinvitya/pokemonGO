@@ -1,6 +1,6 @@
 package model
 
-type PokemonCard struct {
+type PokemonCardType struct {
 	Name  string   `json:"name"`
 	Image string   `json:"image"`
 	Types []string `json:"types"`

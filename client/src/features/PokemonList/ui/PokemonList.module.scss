@@ -1,0 +1,6 @@
+.pokemonList {
+  width: 70%;
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(3, 1fr);
+}

@@ -27,7 +27,7 @@ func extractTypes(detailInfo model.PokemonDetail) []string {
 	return types
 }
 
-func (c *Client) GetMainPageData() ([]model.PokemonCard, error) {
+func (c *Client) GetMainPageData() ([]model.PokemonCardType, error) {
 	url := fmt.Sprintf("%s/pokemon", baseUrl)
 	resp, err := c.client.Get(url)
 	if err != nil {
@@ -40,7 +40,7 @@ func (c *Client) GetMainPageData() ([]model.PokemonCard, error) {
 		return nil, err
 	}
 
-	var cards []model.PokemonCard
+	var cards []model.PokemonCardType
 	for _, pokemon := range r.Result {
 		detailResp, err := c.client.Get(pokemon.Url)
 		if err != nil {
@@ -54,7 +54,7 @@ func (c *Client) GetMainPageData() ([]model.PokemonCard, error) {
 		}
 		detailResp.Body.Close()
 
-		cards = append(cards, model.PokemonCard{
+		cards = append(cards, model.PokemonCardType{
 			Name:  detailInfo.Name,
 			Image: detailInfo.Sprites.FrontDefault,
 			Types: extractTypes(detailInfo),

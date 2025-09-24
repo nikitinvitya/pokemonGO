@@ -17,6 +17,9 @@ func InitRoutes() http.Handler {
 }
 
 func mainPageHandle(w http.ResponseWriter, _ *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
+	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
 	c := client.NewClient()
 
 	resp, err := c.GetMainPageData()
@@ -33,6 +36,9 @@ func mainPageHandle(w http.ResponseWriter, _ *http.Request) {
 }
 
 func currentPokemonHandle(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
+	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
 	c := client.NewClient()
 
 	pathParts := strings.Split(r.URL.Path, "/")
