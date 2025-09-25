@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"github/nikitinvitya/pokemongo/internal/client"
 	"net/http"
+	"strconv"
 	"strings"
 )
 
@@ -16,13 +17,26 @@ func InitRoutes() http.Handler {
 	return mux
 }
 
-func mainPageHandle(w http.ResponseWriter, _ *http.Request) {
+func mainPageHandle(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
 	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
 	c := client.NewClient()
 
-	resp, err := c.GetMainPageData()
+	limitString := r.URL.Query().Get("limit")
+	offsetString := r.URL.Query().Get("offset")
+
+	limit, err := strconv.Atoi(limitString)
+	if err != nil || limit <= 0 {
+		limit = 20
+	}
+
+	offset, err := strconv.Atoi(offsetString)
+	if err != nil || offset < 0 {
+		offset = 0
+	}
+
+	resp, err := c.GetMainPageData(limit, offset)
 	if err != nil {
 		NewErrorResponse(w, http.StatusInternalServerError, "failed to fetch data")
 		return

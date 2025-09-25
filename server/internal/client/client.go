@@ -27,8 +27,8 @@ func extractTypes(detailInfo model.PokemonDetail) []string {
 	return types
 }
 
-func (c *Client) GetMainPageData() ([]model.PokemonCardType, error) {
-	url := fmt.Sprintf("%s/pokemon", baseUrl)
+func (c *Client) GetMainPageData(limit int, offset int) ([]model.PokemonCardType, error) {
+	url := fmt.Sprintf("%s/pokemon?limit=%d&offset=%d", baseUrl, limit, offset)
 	resp, err := c.client.Get(url)
 	if err != nil {
 		return nil, err
