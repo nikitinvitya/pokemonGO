@@ -1,0 +1,20 @@
+button {
+  cursor: pointer;
+  color: var(--primary-color);
+  --button-size-m: 40px;
+  --button-size-l: 100px;
+  --button-size-xl: 200px;
+}
+
+.bordered {
+  border: 1px solid #000;
+}
+
+.size_m {
+  width: var(--button-size-m);
+  height: var(--button-size-m);
+}
+
+.circle {
+  border-radius: 50%;
+}

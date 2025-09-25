@@ -11,3 +11,8 @@ type NamedAPIResource struct {
 	Name string `json:"name"`
 	Url  string `json:"url"`
 }
+
+type PokemonListResponse struct {
+	Count int               `json:"count"`
+	Cards []PokemonCardType `json:"cards"`
+}

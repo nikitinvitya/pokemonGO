@@ -27,7 +27,7 @@ func extractTypes(detailInfo model.PokemonDetail) []string {
 	return types
 }
 
-func (c *Client) GetMainPageData(limit int, offset int) ([]model.PokemonCardType, error) {
+func (c *Client) GetMainPageData(limit int, offset int) (*model.PokemonListResponse, error) {
 	url := fmt.Sprintf("%s/pokemon?limit=%d&offset=%d", baseUrl, limit, offset)
 	resp, err := c.client.Get(url)
 	if err != nil {
@@ -47,6 +47,7 @@ func (c *Client) GetMainPageData(limit int, offset int) ([]model.PokemonCardType
 
 			return nil, err
 		}
+
 		var detailInfo model.PokemonDetail
 		if err = json.NewDecoder(detailResp.Body).Decode(&detailInfo); err != nil {
 			detailResp.Body.Close()
@@ -61,7 +62,10 @@ func (c *Client) GetMainPageData(limit int, offset int) ([]model.PokemonCardType
 		})
 	}
 
-	return cards, nil
+	return &model.PokemonListResponse{
+		Count: r.Count,
+		Cards: cards,
+	}, nil
 }
 
 func (c *Client) GetCurrentPokemonData(pokemonName string) (*model.PokemonFullInfo, error) {

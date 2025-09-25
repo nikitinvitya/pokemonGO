@@ -1,0 +1,10 @@
+.pagination {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.page_btn {
+  background: var(--bg-color);
+  border: 1px solid var(--secondary-color);
+  color: var(--primary-color)
+}
