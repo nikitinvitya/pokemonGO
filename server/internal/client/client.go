@@ -68,7 +68,7 @@ func (c *Client) GetMainPageData(limit int, offset int) (*model.PokemonListRespo
 	}, nil
 }
 
-func (c *Client) GetCurrentPokemonData(pokemonName string) (*model.PokemonFullInfo, error) {
+func (c *Client) GetPokemonPageData(pokemonName string) (*model.PokemonFullInfo, error) {
 	url := fmt.Sprintf("%s/pokemon/%s", baseUrl, pokemonName)
 
 	resp, err := c.client.Get(url)

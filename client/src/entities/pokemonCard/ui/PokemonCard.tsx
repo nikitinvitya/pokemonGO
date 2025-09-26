@@ -1,4 +1,5 @@
 import cls from './PokemonCard.module.scss';
+import { normalizeName } from '@/shared/lib/normalizeName';
 
 interface pokemonCardProps {
   name: string;
@@ -8,11 +9,6 @@ interface pokemonCardProps {
 }
 
 export const PokemonCard = (props: pokemonCardProps) => {
-  const normalizeName = (name: string): string => {
-    name = name[0].toUpperCase() + name.slice(1).toLowerCase();
-    return name.split('-').join(' ');
-  };
-
   const { types, name, image } = props;
   return (
     <div className={cls.pokemonCard}>

@@ -1,15 +1,15 @@
 import { RouteProps } from 'react-router-dom';
 import { MainPage } from '@/pages/MainPage';
-import { CurrentPokemonPage } from '@/pages/CurrentPokemonPage';
+import { PokemonPage } from '@/pages/PokemonPage';
 
 const enum AppRoutes {
   MAIN = 'main',
-  CurrentPokemon = 'pokemon',
+  POKEMON_PAGE = 'pokemon',
 }
 
 export const RoutePath: Record<AppRoutes, string> = {
   [AppRoutes.MAIN]: '/',
-  [AppRoutes.CurrentPokemon]: '/pokemon',
+  [AppRoutes.POKEMON_PAGE]: 'pokemon/:name',
 };
 
 export const routeConfig: Record<AppRoutes, RouteProps> = {
@@ -17,8 +17,8 @@ export const routeConfig: Record<AppRoutes, RouteProps> = {
     path: RoutePath.main,
     element: <MainPage />,
   },
-  [AppRoutes.CurrentPokemon]: {
+  [AppRoutes.POKEMON_PAGE]: {
     path: RoutePath.pokemon,
-    element: <CurrentPokemonPage />,
+    element: <PokemonPage />,
   },
 };

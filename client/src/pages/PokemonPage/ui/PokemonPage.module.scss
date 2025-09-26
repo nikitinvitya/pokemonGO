@@ -1,0 +1,50 @@
+.pokemonPage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+  gap: 2rem;
+}
+
+.images {
+  font: var(--font-l);
+  color: var(--primary-color);
+  width: 80%;
+  text-align: center;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+.images > p {
+  grid-column: 1/-1;
+}
+
+.images img {
+  width: 100%;
+  justify-self: center;
+  align-self: center;
+}
+
+.pokemonLook {
+  width: 80%;
+
+  display: flex;
+  gap: 2rem;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.pokemonLook span {
+  display: flex;
+  flex-direction: column;
+}
+
+.stats {
+  width: 80%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+
+}
