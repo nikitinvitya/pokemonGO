@@ -28,6 +28,7 @@ type PokemonFullInfo struct {
 	Stats     []State        `json:"stats"`
 	Abilities []Ability      `json:"abilities"`
 	Sprites   PokemonSprites `json:"sprites"`
+	Types     []PokemonType  `json:"types"`
 }
 
 type State struct {
@@ -36,6 +37,17 @@ type State struct {
 }
 
 type Ability struct {
-	Ability  NamedAPIResource `json:"ability"`
-	IsHidden bool             `json:"is_hidden"`
+	Ability     NamedAPIResource `json:"ability"`
+	IsHidden    bool             `json:"is_hidden"`
+	Description string           `json:"description"`
+}
+
+type AbilityDetail struct {
+	EffectEntries []struct {
+		Effect      string `json:"effect"`
+		ShortEffect string `json:"short_effect"`
+		Language    struct {
+			Name string `json:"name"`
+		} `json:"language"`
+	} `json:"effect_entries"`
 }

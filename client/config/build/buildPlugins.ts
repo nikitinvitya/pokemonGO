@@ -17,7 +17,7 @@ export const buildPlugins = ({
       chunkFilename: 'css/[name].[contenthash:8].css',
     }),
     new BundleAnalyzerPlugin({
-      openAnalyzer: true,
+      openAnalyzer: false,
     }),
   ];
 };

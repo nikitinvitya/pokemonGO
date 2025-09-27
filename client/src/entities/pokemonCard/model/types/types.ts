@@ -14,6 +14,11 @@ interface NamedApiResponse {
   url: string;
 }
 
+interface PokemonType {
+  slot: number;
+  type: NamedApiResponse;
+}
+
 interface PokemonStat {
   baseStat: number;
   stat: NamedApiResponse;
@@ -22,6 +27,7 @@ interface PokemonStat {
 interface PokemonAbility {
   isHidden: boolean;
   ability: NamedApiResponse;
+  description?: string;
 }
 
 interface PokemonSprites {
@@ -36,4 +42,5 @@ export interface PokemonFullInfo {
   stats: PokemonStat[];
   abilities: PokemonAbility[];
   sprites: PokemonSprites;
+  types: PokemonType[];
 }

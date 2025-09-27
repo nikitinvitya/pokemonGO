@@ -27,6 +27,26 @@ func extractTypes(detailInfo model.PokemonDetail) []string {
 	return types
 }
 
+func (c *Client) extractAbilityDescription(url string) (string, error) {
+	resp, err := c.client.Get(url)
+	if err != nil {
+		return "", err
+	}
+	defer resp.Body.Close()
+
+	var detail model.AbilityDetail
+	if err := json.NewDecoder(resp.Body).Decode(&detail); err != nil {
+		return "", err
+	}
+
+	for _, entry := range detail.EffectEntries {
+		if entry.Language.Name == "en" {
+			return entry.Effect, nil
+		}
+	}
+	return "", nil
+}
+
 func (c *Client) GetMainPageData(limit int, offset int) (*model.PokemonListResponse, error) {
 	url := fmt.Sprintf("%s/pokemon?limit=%d&offset=%d", baseUrl, limit, offset)
 	resp, err := c.client.Get(url)
@@ -70,16 +90,23 @@ func (c *Client) GetMainPageData(limit int, offset int) (*model.PokemonListRespo
 
 func (c *Client) GetPokemonPageData(pokemonName string) (*model.PokemonFullInfo, error) {
 	url := fmt.Sprintf("%s/pokemon/%s", baseUrl, pokemonName)
-
 	resp, err := c.client.Get(url)
-	var r model.PokemonFullInfo
 	if err != nil {
 		return nil, err
 	}
 	defer resp.Body.Close()
 
+	var r model.PokemonFullInfo
 	if err = json.NewDecoder(resp.Body).Decode(&r); err != nil {
 		return nil, err
+	}
+
+	for i, ability := range r.Abilities {
+		desc, err := c.extractAbilityDescription(ability.Ability.Url)
+		if err != nil {
+			return nil, err
+		}
+		r.Abilities[i].Description = desc
 	}
 
 	return &r, nil

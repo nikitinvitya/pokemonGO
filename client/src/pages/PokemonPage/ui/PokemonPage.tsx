@@ -2,6 +2,7 @@ import { pokemonPageApi } from '@/shared/api/PokemonPageApi/pokemonPageApi';
 import { useParams } from 'react-router-dom';
 import cls from './PokemonPage.module.scss';
 import { normalizeName } from '@/shared/lib/normalizeName';
+import { GaugeArc } from '@/shared/ui/GaugeArc/GaugeArc';
 
 const PokemonPage = () => {
   const { name: pokemonName } = useParams<{ name: string }>();
@@ -23,6 +24,7 @@ const PokemonPage = () => {
 
   return (
     <div className={cls.pokemonPage}>
+      <h1>{normalizeName(data.name)}</h1>
       <div className={cls.images}>
         <p>Photos</p>
         <img
@@ -34,27 +36,49 @@ const PokemonPage = () => {
           alt={`${normalizeName(data.name)} back`}
         />
       </div>
-      <hr />
+
       <div className={cls.pokemonLook}>
-        <span>Height: {data.height}</span>
-        <span>Weight: {data.weight}</span>
+        <span>Height: {data.height} dm</span>
+        <span>Weight: {data.weight} hg</span>
       </div>
-      <hr />
+
+      <div>
+        <p>
+          Types:
+          {data.types.map((type) => (
+            <span key={type.type.name}>{` ${type.type.name}`}</span>
+          ))}
+        </p>
+      </div>
 
       <div className={cls.stats}>
+        <p>Stats</p>
         {data.stats.map((stat) => (
           <div className={cls.stat} key={stat.stat.name}>
-            <p>{stat.baseStat}</p>
-            <p>{stat.stat.name}</p>
+            <GaugeArc
+              value={stat.baseStat}
+              max={100}
+              size={220}
+              strokeWidth={18}
+              duration={1000}
+            />
+            <p>{normalizeName(stat.stat.name)}</p>
           </div>
         ))}
       </div>
-      <hr />
 
       <div className={cls.abilities}>
+        <p>Abilities</p>
         {data.abilities.map((ability) => (
           <div className={cls.ability} key={ability.ability.name}>
-            {ability.ability.name}
+            <p className={cls.abilityName}>
+              {normalizeName(ability.ability.name)}
+            </p>
+            <p>
+              {ability.description
+                ? ability.description
+                : 'Description  is missing'}
+            </p>
           </div>
         ))}
       </div>
