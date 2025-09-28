@@ -46,7 +46,9 @@ const PokemonPage = () => {
         <p>
           Types:
           {data.types.map((type) => (
-            <span key={type.type.name}>{` ${type.type.name}`}</span>
+            <span
+              key={type.type.name}
+            >{` ${type.type.name}${data.types.length > 1 ? ', ' : ''}`}</span>
           ))}
         </p>
       </div>

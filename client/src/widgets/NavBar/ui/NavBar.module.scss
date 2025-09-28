@@ -1,0 +1,16 @@
+.navBar {
+  height: var(--navbar-height);
+  min-width: 100%;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--secondary-color);
+  justify-content: space-between;
+  padding: 20px;
+  position: fixed;
+  background: var(--bg-color);
+}
+
+.logo > img {
+  width: 150px;
+  height: auto;
+}

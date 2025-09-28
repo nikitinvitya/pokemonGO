@@ -79,7 +79,7 @@ export const GaugeArc: React.FC<GaugeArcProps> = ({
         textAnchor="middle"
         fontSize={size * 0.15}
         fontWeight="bold"
-        fill="#333"
+        fill="var(--secondary-color)"
       >
         {value}
       </text>

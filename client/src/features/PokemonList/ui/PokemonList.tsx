@@ -4,8 +4,13 @@ import { PokemonCard } from '@/entities/pokemonCard/';
 import { useAppDispatch, useAppSelector } from '@/app/providers/StoreProvider';
 import { useEffect } from 'react';
 import { setTotalCount } from '@/features/Pagination/model/slice/paginationSlice';
+import classNames from 'classnames';
 
-export const PokemonList = () => {
+interface PokemonListProps {
+  className?: string;
+}
+
+export const PokemonList = ({ className }: PokemonListProps) => {
   const dispatch = useAppDispatch();
   const { cardsOnPage, currentPage } = useAppSelector(
     (state) => state.pagination,
@@ -14,7 +19,7 @@ export const PokemonList = () => {
   const limit = cardsOnPage;
   const offset = cardsOnPage * (currentPage - 1);
 
-  const { error, data, isLoading } =
+  const { error, data, isLoading, isFetching } =
     pokemonCardApi.useFetchAllPokemonCardsQuery({ limit, offset });
 
   useEffect(() => {
@@ -33,8 +38,12 @@ export const PokemonList = () => {
     return <div>Error</div>;
   }
 
+  if (isFetching) {
+    return <div>Loading...</div>;
+  }
+
   return (
-    <div className={cls.pokemonList}>
+    <div className={classNames(cls.pokemonList, className)}>
       {pokemonCards &&
         pokemonCards.map((card) => (
           <PokemonCard
