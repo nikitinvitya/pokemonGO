@@ -1,6 +1,6 @@
 import './styles/index.scss';
 import { AppRouter } from '@/app/providers/router';
-import { NavBar } from '@/widgets/NavBar/ui/NavBar';
+import { NavBar } from '@/widgets/NavBar/';
 
 const App = () => {
   return (
