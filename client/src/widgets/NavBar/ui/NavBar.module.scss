@@ -1,17 +1,66 @@
 .navBar {
   height: var(--navbar-height);
   min-width: 100%;
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   align-items: center;
+  justify-content: center;
   border-bottom: 1px solid var(--secondary-color);
-  justify-content: space-between;
   padding: 20px;
   position: fixed;
   z-index: 100;
   background: var(--bg-color);
 }
 
+
 .logo > img {
   width: 150px;
   height: auto;
+}
+
+.searchWrapper {
+  position: relative;
+  width: 60%;
+  justify-self: center;
+}
+
+.inputName {
+  width: 100%;
+  background: var(--bg-color);
+  color: var(--secondary-color);
+  border: 1px solid var(--secondary-color);
+  border-radius: 10px;
+  padding-left: 10px;
+}
+
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  color: var(--secondary-color);
+  background: var(--bg-color);
+  border: 1px solid var(--secondary-color);
+  border-radius: 10px;
+  margin-top: 5px;
+  padding: 0;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.dropdown {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.dropdownLink {
+  color: var(--secondary-color);
+}
+
+.dropdownLink:hover {
+  background: var(--hovered-color);
+  border-radius: 10px;
 }

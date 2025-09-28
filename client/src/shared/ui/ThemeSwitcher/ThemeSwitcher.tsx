@@ -7,7 +7,6 @@ import { useTheme } from '@/app/providers/ThemeProvider';
 export const ThemeSwitcher = () => {
   const { toggleTheme, theme } = useTheme();
 
-  console.log(theme);
   return (
     <Button className={classNames(cls.themeSwitcher)} onClick={toggleTheme}>
       {theme === 'light' ? (

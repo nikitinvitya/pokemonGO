@@ -1,4 +1,4 @@
-import { pokemonPageApi } from '@/shared/api/PokemonPageApi/pokemonPageApi';
+import { pokemonPageApi } from '@/shared/api/pokemonPageApi/pokemonPageApi';
 import { useParams } from 'react-router-dom';
 import cls from './PokemonPage.module.scss';
 import { normalizeName } from '@/shared/lib/normalizeName';

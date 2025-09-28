@@ -7,12 +7,17 @@ interface AppLinkProps {
   children?: React.ReactNode;
   to: string;
   className?: string;
+  onClick?: () => void;
 }
 
 export const AppLink = (props: AppLinkProps) => {
-  const { to, className, children } = props;
+  const { to, className, children, onClick } = props;
   return (
-    <Link to={to} className={classNames(cls.appLink, className)}>
+    <Link
+      to={to}
+      onClick={onClick}
+      className={classNames(cls.appLink, className)}
+    >
       {children}
     </Link>
   );

@@ -2,15 +2,17 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { StateSchema } from '../types/StateSchema';
 import { pokemonCardApi } from '@/shared/api/pokemonCardApi/pokemonCardApi';
 import { paginationSlice } from '@/features/Pagination';
-import { pokemonPageApi } from '@/shared/api/PokemonPageApi/pokemonPageApi';
+import { pokemonPageApi } from '@/shared/api/pokemonPageApi/pokemonPageApi';
+import { searchPokemonByNameApi } from '@/shared/api/searchPokemonByName/searchPokemonByNameApi';
 
 const rootReducer = combineReducers({
   [pokemonCardApi.reducerPath]: pokemonCardApi.reducer,
-  pagination: paginationSlice,
   [pokemonPageApi.reducerPath]: pokemonPageApi.reducer,
+  [searchPokemonByNameApi.reducerPath]: searchPokemonByNameApi.reducer,
+  pagination: paginationSlice,
 });
 
-const apis = [pokemonCardApi, pokemonPageApi];
+const apis = [pokemonCardApi, pokemonPageApi, searchPokemonByNameApi];
 const middlewares = apis.map((api) => api.middleware);
 
 export const createReduxStore = (initialState?: StateSchema) => {
