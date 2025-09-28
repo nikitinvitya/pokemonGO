@@ -114,7 +114,7 @@ func (c *Client) GetPokemonPageData(pokemonName string) (*model.PokemonFullInfo,
 }
 
 func (c *Client) SearchPokemonByName(query string, limit int) ([]string, error) {
-	url := fmt.Sprintf("%s/pokemon", baseUrl)
+	url := fmt.Sprintf("%s/pokemon?limit=2000&offset=0", baseUrl)
 
 	resp, err := c.client.Get(url)
 	if err != nil {

@@ -102,6 +102,7 @@ func SearchPokemonHandle(w http.ResponseWriter, r *http.Request) {
 	resp, err := c.SearchPokemonByName(query, limit)
 	if err != nil {
 		NewErrorResponse(w, http.StatusBadRequest, "failed to fetch data")
+		return
 	}
 
 	if err = json.NewEncoder(w).Encode(resp); err != nil {
