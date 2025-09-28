@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from '@/app/providers/StoreProvider';
 import { useEffect } from 'react';
 import { setTotalCount } from '@/features/Pagination/model/slice/paginationSlice';
 import classNames from 'classnames';
+import { AppLink } from '@/shared/ui/AppLink/AppLink';
 
 interface PokemonListProps {
   className?: string;
@@ -15,6 +16,10 @@ export const PokemonList = ({ className }: PokemonListProps) => {
   const { cardsOnPage, currentPage } = useAppSelector(
     (state) => state.pagination,
   );
+
+  useEffect(() => {
+    document.title = 'Pokemons';
+  }, []);
 
   const limit = cardsOnPage;
   const offset = cardsOnPage * (currentPage - 1);
@@ -46,12 +51,13 @@ export const PokemonList = ({ className }: PokemonListProps) => {
     <div className={classNames(cls.pokemonList, className)}>
       {pokemonCards &&
         pokemonCards.map((card) => (
-          <PokemonCard
-            key={card.name}
-            name={card.name}
-            image={card.image}
-            types={card.types}
-          />
+          <AppLink key={card.name} to={`pokemon/${card.name}`}>
+            <PokemonCard
+              name={card.name}
+              image={card.image}
+              types={card.types}
+            />
+          </AppLink>
         ))}
     </div>
   );
