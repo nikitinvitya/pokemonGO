@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github/nikitinvitya/pokemongo/internal/model"
 	"net/http"
+	"strings"
 )
 
 type Client struct {
@@ -110,4 +111,30 @@ func (c *Client) GetPokemonPageData(pokemonName string) (*model.PokemonFullInfo,
 	}
 
 	return &r, nil
+}
+
+func (c *Client) SearchPokemonByName(query string, limit int) ([]string, error) {
+	url := fmt.Sprintf("%s/pokemon", baseUrl)
+
+	resp, err := c.client.Get(url)
+	if err != nil {
+		return nil, err
+	}
+
+	var response model.ApiResponse
+	if err = json.NewDecoder(resp.Body).Decode(&response); err != nil {
+		return nil, err
+	}
+
+	var result []string
+	for _, pokemon := range response.Result {
+		if strings.Contains(pokemon.Name, strings.ToLower(query)) {
+			result = append(result, pokemon.Name)
+			if len(result) > limit {
+				break
+			}
+		}
+	}
+
+	return result, nil
 }
