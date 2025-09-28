@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import cls from './GaugeArc.module.scss';
 
 interface GaugeArcProps {
@@ -21,20 +21,46 @@ export const GaugeArc: React.FC<GaugeArcProps> = ({
   const targetProgress = Math.min(value / max, 1) * circumference;
 
   const [progress, setProgress] = useState(0);
+  const svgRef = useRef<SVGSVGElement | null>(null);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      setProgress(targetProgress);
-    }, 50);
-    return () => clearTimeout(timeout);
-  }, [targetProgress]);
+    if (!svgRef.current) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.5 },
+    );
 
-  // Новая Y-координата для начальной и конечной точек дуги.
-  // Сдвигает дугу вверх на strokeWidth / 2, чтобы обеспечить полную видимость закругленных концов.
-  const arcYCoordinate = radius; // Изменено с `radius + strokeWidth / 2`
+    observer.observe(svgRef.current);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
+  useEffect(() => {
+    if (visible) {
+      const timeout = setTimeout(() => {
+        setProgress(targetProgress);
+      }, 50);
+      return () => clearTimeout(timeout);
+    }
+  }, [targetProgress, visible]);
+
+  const arcYCoordinate = radius;
 
   return (
-    <svg width={size} height={size / 1.5} viewBox={`0 0 ${size} ${size / 2}`}>
+    <svg
+      ref={svgRef}
+      width={size}
+      height={size / 1.5}
+      viewBox={`0 0 ${size} ${size / 2}`}
+    >
       <defs>
         <linearGradient id="gauge-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
           <stop offset="0%" stopColor="red" />
@@ -46,9 +72,7 @@ export const GaugeArc: React.FC<GaugeArcProps> = ({
       <path
         d={`
           M ${strokeWidth / 2} ${arcYCoordinate}
-          A ${radius} ${radius} 0 0 1 ${size - strokeWidth / 2} ${
-            arcYCoordinate
-          }
+          A ${radius} ${radius} 0 0 1 ${size - strokeWidth / 2} ${arcYCoordinate}
         `}
         stroke="#eee"
         strokeWidth={strokeWidth}
@@ -59,9 +83,7 @@ export const GaugeArc: React.FC<GaugeArcProps> = ({
       <path
         d={`
           M ${strokeWidth / 2} ${arcYCoordinate}
-          A ${radius} ${radius} 0 0 1 ${size - strokeWidth / 2} ${
-            arcYCoordinate
-          }
+          A ${radius} ${radius} 0 0 1 ${size - strokeWidth / 2} ${arcYCoordinate}
         `}
         className={cls.arc}
         stroke="url(#gauge-gradient)"

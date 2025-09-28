@@ -23,7 +23,7 @@
   gap: 2rem;
 }
 
-.images > p {
+.images > h2 {
   color: var(--primary-color);
   grid-column: 1/-1;
 }
@@ -57,7 +57,7 @@
   grid-template-columns: repeat(3, 1fr);
 }
 
-.stats > p {
+.stats > h2 {
   color: var(--primary-color);
   grid-column: 1/-1;
 }
@@ -75,7 +75,7 @@
   justify-content: space-around;
 }
 
-.abilities > p {
+.abilities > h2 {
   color: var(--primary-color);
   flex-basis: 100%;
   text-align: center;

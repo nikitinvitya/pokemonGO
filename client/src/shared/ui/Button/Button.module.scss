@@ -1,7 +1,7 @@
 button {
   cursor: pointer;
   color: var(--primary-color);
-  --button-size-m: 40px;
+  --button-size-m: 50px;
   --button-size-l: 100px;
   --button-size-xl: 200px;
 }
@@ -13,6 +13,11 @@ button {
 .size_m {
   width: var(--button-size-m);
   height: var(--button-size-m);
+}
+
+.size_l {
+  width: var(--button-size-l);
+  height: var(--button-size-l);
 }
 
 .circle {

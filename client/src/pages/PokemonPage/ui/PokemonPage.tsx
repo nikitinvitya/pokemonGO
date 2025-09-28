@@ -26,7 +26,7 @@ const PokemonPage = () => {
     <div className={cls.pokemonPage}>
       <h1>{normalizeName(data.name)}</h1>
       <div className={cls.images}>
-        <p>Photos</p>
+        <h2>Photos</h2>
         <img
           src={data.sprites.frontDefault}
           alt={`${normalizeName(data.name)} front`}
@@ -54,7 +54,7 @@ const PokemonPage = () => {
       </div>
 
       <div className={cls.stats}>
-        <p>Stats</p>
+        <h2>Stats</h2>
         {data.stats.map((stat) => (
           <div className={cls.stat} key={stat.stat.name}>
             <GaugeArc
@@ -70,7 +70,7 @@ const PokemonPage = () => {
       </div>
 
       <div className={cls.abilities}>
-        <p>Abilities</p>
+        <h2>Abilities</h2>
         {data.abilities.map((ability) => (
           <div className={cls.ability} key={ability.ability.name}>
             <p className={cls.abilityName}>

@@ -49,6 +49,7 @@ export const PokemonList = ({ className }: PokemonListProps) => {
 
   return (
     <div className={classNames(cls.pokemonList, className)}>
+      <h1>Pokemons</h1>
       {pokemonCards &&
         pokemonCards.map((card) => (
           <AppLink key={card.name} to={`pokemon/${card.name}`}>
