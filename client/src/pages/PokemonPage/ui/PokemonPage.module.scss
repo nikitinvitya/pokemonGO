@@ -94,3 +94,25 @@
   gap: 1rem;
 }
 
+.nextLink,
+.prevLink {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+
+.prevLink {
+  transform: rotate(180deg);
+  left: 1rem;
+}
+
+.nextLink {
+  right: 1rem;
+}
+
+.prev,
+.next {
+  width: 40px;
+  height: 40px;
+}

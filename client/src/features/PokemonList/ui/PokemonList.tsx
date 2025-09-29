@@ -1,5 +1,5 @@
 import cls from './PokemonList.module.scss';
-import { pokemonCardApi } from '@/shared/api/pokemonCardApi/pokemonCardApi';
+import { getPokemonCardApi } from '@/shared/api/getPokemonCardApi/getPokemonCardApi';
 import { PokemonCard } from '@/entities/pokemonCard/';
 import { useAppDispatch, useAppSelector } from '@/app/providers/StoreProvider';
 import { useEffect } from 'react';
@@ -25,7 +25,7 @@ export const PokemonList = ({ className }: PokemonListProps) => {
   const offset = cardsOnPage * (currentPage - 1);
 
   const { error, data, isLoading, isFetching } =
-    pokemonCardApi.useFetchAllPokemonCardsQuery({ limit, offset });
+    getPokemonCardApi.useFetchAllPokemonCardsQuery({ limit, offset });
 
   useEffect(() => {
     if (data?.count !== undefined) {

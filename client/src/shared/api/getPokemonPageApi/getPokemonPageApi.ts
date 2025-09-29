@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { PokemonFullInfo } from '@/entities/pokemonCard/model/types/types';
 import { camelizeKeys } from '@/shared/lib/camelizeKeys';
 
-export const pokemonPageApi = createApi({
+export const getPokemonPageApi = createApi({
   reducerPath: 'pokemonPageApi',
   baseQuery: fetchBaseQuery({
     baseUrl: 'http://localhost:8080/api/pokemon/',

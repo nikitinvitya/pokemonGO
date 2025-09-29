@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const searchPokemonByNameApi = createApi({
-  reducerPath: 'searchPokemonByNameApi',
+  reducerPath: 'pokemonByNameApi',
   baseQuery: fetchBaseQuery({
     baseUrl: 'http://localhost:8080/api/',
   }),
