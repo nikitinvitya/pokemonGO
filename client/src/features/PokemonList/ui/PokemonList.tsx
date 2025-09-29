@@ -7,6 +7,7 @@ import { setTotalCount } from '@/features/Pagination/model/slice/paginationSlice
 import classNames from 'classnames';
 import { AppLink } from '@/shared/ui/AppLink/AppLink';
 import { Error } from '@/shared/ui/Error/Error';
+import { Loading } from '@/shared/ui/Loading/Loading';
 
 interface PokemonListProps {
   className?: string;
@@ -29,6 +30,19 @@ export const PokemonList = ({ className }: PokemonListProps) => {
     getPokemonCardApi.useFetchAllPokemonCardsQuery({ limit, offset });
 
   useEffect(() => {
+    if (data?.cards) {
+      const timer = setTimeout(() => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth',
+        });
+      }, 0);
+
+      return () => clearTimeout(timer);
+    }
+  }, [currentPage, data?.cards]);
+
+  useEffect(() => {
     if (data?.count !== undefined) {
       dispatch(setTotalCount(data.count));
     }
@@ -37,7 +51,7 @@ export const PokemonList = ({ className }: PokemonListProps) => {
   const pokemonCards = data?.cards;
 
   if (isLoading || isFetching) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   if (error) {

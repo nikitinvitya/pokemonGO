@@ -8,6 +8,7 @@ import Arrow from '@/shared/assets/Arrow.svg';
 import { AppLink } from '@/shared/ui/AppLink/AppLink';
 import { useEffect } from 'react';
 import { Error } from '@/shared/ui/Error/Error';
+import { Loading } from '@/shared/ui/Loading/Loading';
 
 const PokemonPage = () => {
   const { name: pokemonName } = useParams<{ name: string }>();
@@ -32,7 +33,7 @@ const PokemonPage = () => {
   }, [data]);
 
   if (isLoadingPage || isNamesLoading) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   if (namesFetchError || PageFetchError) {

@@ -18,10 +18,6 @@ export const Pagination = () => {
   const [inputPage, setInputPage] = useState('');
 
   const onPageChange = (page: number) => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
     setInputPage('');
     dispatch(setPage(page));
   };
