@@ -7,6 +7,7 @@ import { getPokemonNamesApi } from '@/shared/api/getPokemonNamesApi/getPokemonNa
 import Arrow from '@/shared/assets/Arrow.svg';
 import { AppLink } from '@/shared/ui/AppLink/AppLink';
 import { useEffect } from 'react';
+import { Error } from '@/shared/ui/Error/Error';
 
 const PokemonPage = () => {
   const { name: pokemonName } = useParams<{ name: string }>();
@@ -35,7 +36,7 @@ const PokemonPage = () => {
   }
 
   if (namesFetchError || PageFetchError) {
-    return <div>Error</div>;
+    return <Error />;
   }
 
   const currentIndex = names.findIndex((name) => name === pokemonName);

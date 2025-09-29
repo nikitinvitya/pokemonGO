@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 import { setTotalCount } from '@/features/Pagination/model/slice/paginationSlice';
 import classNames from 'classnames';
 import { AppLink } from '@/shared/ui/AppLink/AppLink';
+import { Error } from '@/shared/ui/Error/Error';
 
 interface PokemonListProps {
   className?: string;
@@ -35,16 +36,12 @@ export const PokemonList = ({ className }: PokemonListProps) => {
 
   const pokemonCards = data?.cards;
 
-  if (isLoading) {
+  if (isLoading || isFetching) {
     return <div>Loading...</div>;
   }
 
   if (error) {
-    return <div>Error</div>;
-  }
-
-  if (isFetching) {
-    return <div>Loading...</div>;
+    return <Error />;
   }
 
   return (
