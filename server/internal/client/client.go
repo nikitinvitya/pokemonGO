@@ -138,3 +138,24 @@ func (c *Client) SearchPokemonByName(query string, limit int) ([]string, error) 
 
 	return result, nil
 }
+
+func (c *Client) GetAllPokemonNames() ([]string, error) {
+	url := fmt.Sprintf("%s/pokemon?limit=2000&offset=0", baseUrl)
+
+	resp, err := c.client.Get(url)
+	if err != nil {
+		return nil, err
+	}
+
+	var response model.ApiResponse
+	if err = json.NewDecoder(resp.Body).Decode(&response); err != nil {
+		return nil, err
+	}
+
+	var result []string
+	for _, card := range response.Result {
+		result = append(result, card.Name)
+	}
+
+	return result, nil
+}

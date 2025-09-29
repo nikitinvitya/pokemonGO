@@ -12,8 +12,9 @@ func InitRoutes() http.Handler {
 	mux := http.NewServeMux()
 
 	mux.HandleFunc("/api/main", mainPageHandle)
-	mux.HandleFunc("/api/pokemon/", PokemonPageHandle)
-	mux.HandleFunc("/api/search/", SearchPokemonHandle)
+	mux.HandleFunc("/api/pokemon/", pokemonPageHandle)
+	mux.HandleFunc("/api/search/", searchPokemonHandle)
+	mux.HandleFunc("/api/pokemonNames/", getPokemonNames)
 
 	return mux
 }
@@ -51,7 +52,7 @@ func mainPageHandle(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func PokemonPageHandle(w http.ResponseWriter, r *http.Request) {
+func pokemonPageHandle(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
 	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
@@ -74,12 +75,12 @@ func PokemonPageHandle(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if err = json.NewEncoder(w).Encode(resp); err != nil {
-		NewErrorResponse(w, http.StatusInternalServerError, "failed to fetch data")
+		NewErrorResponse(w, http.StatusInternalServerError, "failed to encode response")
 		return
 	}
 }
 
-func SearchPokemonHandle(w http.ResponseWriter, r *http.Request) {
+func searchPokemonHandle(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
 	w.Header().Set("Access-Control-Allow-Methods", "GET, OPTIONS")
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
@@ -106,7 +107,26 @@ func SearchPokemonHandle(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if err = json.NewEncoder(w).Encode(resp); err != nil {
-		NewErrorResponse(w, http.StatusInternalServerError, "failed to fetch data")
+		NewErrorResponse(w, http.StatusInternalServerError, "failed to encode response")
+		return
+	}
+}
+
+func getPokemonNames(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
+	w.Header().Set("Access-Control-Allow-Methods", "GET, OPTIONS")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
+	w.Header().Set("Content-Type", "application/json")
+	c := client.NewClient()
+
+	resp, err := c.GetAllPokemonNames()
+	if err != nil {
+		NewErrorResponse(w, http.StatusBadRequest, "failed to fetch data")
+		return
+	}
+
+	if err = json.NewEncoder(w).Encode(&resp); err != nil {
+		NewErrorResponse(w, http.StatusInternalServerError, "failed to encode response")
 		return
 	}
 }
