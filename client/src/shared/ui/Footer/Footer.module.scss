@@ -2,8 +2,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  height: var(--footer-height);
   border-top: 1px solid var(--secondary-color);
   padding: 10px 0;
   margin-top: auto;
-
 }

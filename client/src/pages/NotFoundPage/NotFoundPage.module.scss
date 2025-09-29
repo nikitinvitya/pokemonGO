@@ -1,0 +1,22 @@
+.notFound {
+  width: 100%;
+  padding-top: var(--navbar-height);
+  min-height: calc(100vh - var(--footer-height));
+  display: flex;
+  gap: 4rem;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  font: var(--font-l);
+}
+
+.homeButton {
+  background: var(--bg-color);
+  border: 1px solid var(--secondary-color);
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.homeLink {
+  color: var(--secondary-color);
+}
