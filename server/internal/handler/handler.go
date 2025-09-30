@@ -3,6 +3,7 @@ package handler
 import (
 	"encoding/json"
 	"github/nikitinvitya/pokemongo/internal/client"
+	"github/nikitinvitya/pokemongo/internal/middleware"
 	"net/http"
 	"strconv"
 	"strings"
@@ -16,15 +17,12 @@ func InitRoutes() http.Handler {
 	mux.HandleFunc("/api/search/", searchPokemonHandle)
 	mux.HandleFunc("/api/pokemonNames/", getPokemonNames)
 
-	return mux
+	handlerWithMiddleware := middleware.HeadersMiddleware(mux)
+
+	return handlerWithMiddleware
 }
 
 func mainPageHandle(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
-	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
-	w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
-	w.Header().Set("Content-Type", "application/json")
-
 	c := client.NewClient()
 
 	limitString := r.URL.Query().Get("limit")
@@ -53,11 +51,6 @@ func mainPageHandle(w http.ResponseWriter, r *http.Request) {
 }
 
 func pokemonPageHandle(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
-	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
-	w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
-	w.Header().Set("Content-Type", "application/json")
-
 	c := client.NewClient()
 
 	pathParts := strings.Split(r.URL.Path, "/")
@@ -81,11 +74,6 @@ func pokemonPageHandle(w http.ResponseWriter, r *http.Request) {
 }
 
 func searchPokemonHandle(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
-	w.Header().Set("Access-Control-Allow-Methods", "GET, OPTIONS")
-	w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
-	w.Header().Set("Content-Type", "application/json")
-
 	c := client.NewClient()
 
 	query := r.URL.Query().Get("query")
@@ -112,11 +100,7 @@ func searchPokemonHandle(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func getPokemonNames(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
-	w.Header().Set("Access-Control-Allow-Methods", "GET, OPTIONS")
-	w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
-	w.Header().Set("Content-Type", "application/json")
+func getPokemonNames(w http.ResponseWriter, _ *http.Request) {
 	c := client.NewClient()
 
 	resp, err := c.GetAllPokemonNames()
