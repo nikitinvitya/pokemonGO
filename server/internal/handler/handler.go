@@ -17,7 +17,9 @@ func InitRoutes() http.Handler {
 	mux.HandleFunc("/api/search/", searchPokemonHandle)
 	mux.HandleFunc("/api/pokemonNames/", getPokemonNames)
 
-	handlerWithMiddleware := middleware.HeadersMiddleware(mux)
+	var handlerWithMiddleware http.Handler = mux
+	handlerWithMiddleware = middleware.HeadersMiddleware(handlerWithMiddleware)
+	handlerWithMiddleware = middleware.LoggingMiddleware(handlerWithMiddleware)
 
 	return handlerWithMiddleware
 }
