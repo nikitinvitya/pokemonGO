@@ -10,6 +10,7 @@ import { useEffect } from 'react';
 import { Error } from '@/shared/ui/Error/Error';
 import { Loading } from '@/shared/ui/Loading/Loading';
 import { Image } from '@/shared/ui/Image/Image';
+import { AbilitiesViewer } from '@/features/AbilitiesViewer/AbilitiesViewer';
 
 const PokemonPage = () => {
   const { name: pokemonName } = useParams<{ name: string }>();
@@ -123,21 +124,7 @@ const PokemonPage = () => {
         ))}
       </div>
 
-      <div className={cls.abilities}>
-        <h2>Abilities</h2>
-        {data.abilities.map((ability) => (
-          <div className={cls.ability} key={ability.ability.name}>
-            <p className={cls.abilityName}>
-              {normalizeName(ability.ability.name)}
-            </p>
-            <p>
-              {ability.description
-                ? ability.description
-                : 'Description  is missing'}
-            </p>
-          </div>
-        ))}
-      </div>
+      <AbilitiesViewer abilities={data.abilities} />
     </div>
   );
 };
