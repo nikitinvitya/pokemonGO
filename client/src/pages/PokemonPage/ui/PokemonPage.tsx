@@ -9,6 +9,7 @@ import { AppLink } from '@/shared/ui/AppLink/AppLink';
 import { useEffect } from 'react';
 import { Error } from '@/shared/ui/Error/Error';
 import { Loading } from '@/shared/ui/Loading/Loading';
+import { Image } from '@/shared/ui/Image/Image';
 
 const PokemonPage = () => {
   const { name: pokemonName } = useParams<{ name: string }>();
@@ -73,13 +74,19 @@ const PokemonPage = () => {
       <h1>{normalizeName(data.name)}</h1>
       <div className={cls.images}>
         <h2>Photos</h2>
-        <img
+        <Image
+          className={cls.image}
           src={data.sprites.frontDefault}
           alt={`${normalizeName(data.name)} front`}
+          width={'80%'}
+          height={'auto'}
         />
-        <img
+        <Image
+          className={cls.image}
           src={data.sprites.backDefault}
           alt={`${normalizeName(data.name)} back`}
+          width={'80%'}
+          height={'auto'}
         />
       </div>
 
