@@ -103,16 +103,16 @@
 .prevLink {
   position: fixed;
   top: 50%;
-  transform: translateY(-50%);
 }
 
 
 .prevLink {
-  transform: rotate(180deg);
+  transform: translateY(-50%) rotate(180deg);
   left: 1rem;
 }
 
 .nextLink {
+  transform: translateY(-50%);
   right: 1rem;
 }
 
@@ -120,4 +120,37 @@
 .next {
   width: 40px;
   height: 40px;
+}
+
+@media (max-width: 900px) {
+  .stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 800px) {
+  .images {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .pokemonLook {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .prev,
+  .next {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+@media (max-width: 600px) {
+  .stats {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
 }

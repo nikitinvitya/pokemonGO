@@ -60,6 +60,7 @@ export const GaugeArc: React.FC<GaugeArcProps> = ({
       width={size}
       height={size / 1.5}
       viewBox={`0 0 ${size} ${size / 2}`}
+      className={cls.size}
     >
       <defs>
         <linearGradient id="gauge-gradient" x1="0%" y1="0%" x2="100%" y2="0%">

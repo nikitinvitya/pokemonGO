@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { PokemonFullInfo } from '@/entities/pokemonCard/model/types/types';
+import { PokemonFullInfo } from '@/entities/pokemonCard';
 import { camelizeKeys } from '@/shared/lib/camelizeKeys';
 
 export const getPokemonPageApi = createApi({

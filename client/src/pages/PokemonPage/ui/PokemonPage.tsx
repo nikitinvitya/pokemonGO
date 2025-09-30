@@ -48,30 +48,6 @@ const PokemonPage = () => {
 
   return (
     <div className={cls.pokemonPage}>
-      <AppLink
-        onClick={() => {
-          window.scrollTo({
-            top: 0,
-            behavior: 'smooth',
-          });
-        }}
-        className={cls.nextLink}
-        to={`/pokemon/${names[nextIndex]}`}
-      >
-        <Arrow className={cls.next} />
-      </AppLink>
-      <AppLink
-        onClick={() => {
-          window.scrollTo({
-            top: 0,
-            behavior: 'smooth',
-          });
-        }}
-        className={cls.prevLink}
-        to={`/pokemon/${names[prevIndex]}`}
-      >
-        <Arrow className={cls.prev} />
-      </AppLink>
       <h1>{normalizeName(data.name)}</h1>
       <div className={cls.images}>
         <h2>Photos</h2>
@@ -97,14 +73,7 @@ const PokemonPage = () => {
       </div>
 
       <div>
-        <p>
-          Types:
-          {data.types.map((type) => (
-            <span
-              key={type.type.name}
-            >{` ${type.type.name}${data.types.length > 1 ? ', ' : ''}`}</span>
-          ))}
-        </p>
+        <p>Types: {data.types.map((type) => type.type.name).join(', ')}</p>
       </div>
 
       <div className={cls.stats}>
@@ -125,6 +94,31 @@ const PokemonPage = () => {
       </div>
 
       <AbilitiesViewer abilities={data.abilities} />
+
+      <AppLink
+        onClick={() => {
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+          });
+        }}
+        className={cls.nextLink}
+        to={`/pokemon/${names[nextIndex]}`}
+      >
+        <Arrow className={cls.next} />
+      </AppLink>
+      <AppLink
+        onClick={() => {
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+          });
+        }}
+        className={cls.prevLink}
+        to={`/pokemon/${names[prevIndex]}`}
+      >
+        <Arrow className={cls.prev} />
+      </AppLink>
     </div>
   );
 };
